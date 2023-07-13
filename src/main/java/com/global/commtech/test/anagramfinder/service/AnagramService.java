@@ -3,9 +3,8 @@ package com.global.commtech.test.anagramfinder.service;
 import static java.util.Objects.nonNull;
 
 import com.global.commtech.test.anagramfinder.repository.AnagramRepository;
-import com.global.commtech.test.anagramfinder.util.Alphabet;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,15 +19,16 @@ public class AnagramService {
 
     public void sortIntoAnagrams(final Stream<String> lines) {
         lines.forEach(word -> {
-            final int wordSum = Alphabet.getAlphabeticalSum(word.toCharArray());
-            final Map<Integer, Integer> wordData = Map.of(wordSum, word.length());
-            final Set<String> words = anagramRepository.getAnagram(wordData);
+            final char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            final String key = String.valueOf(chars);
+            final Set<String> words = anagramRepository.getAnagram(key);
             if (nonNull(words)) {
                 final Set<String> newSet = new HashSet<>(words);
                 newSet.add(word);
-                anagramRepository.addAnagram(wordData, newSet);
+                anagramRepository.addAnagram(key, newSet);
             } else {
-                anagramRepository.addAnagram(wordData, Set.of(word));
+                anagramRepository.addAnagram(key, Set.of(word));
             }
         });
         publishAnagrams();

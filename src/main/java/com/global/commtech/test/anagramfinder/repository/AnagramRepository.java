@@ -2,6 +2,7 @@ package com.global.commtech.test.anagramfinder.repository;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -13,14 +14,14 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class AnagramRepository {
 
-    private final Map<Map<Integer, Integer>, Set<String>> anagrams = new HashMap<>();
+    private final Map<String, Set<String>> anagrams = new HashMap<>();
 
-    public Set<String> getAnagram(final Map<Integer, Integer> wordData) {
-        return anagrams.get(wordData);
+    public Set<String> getAnagram(String key) {
+        return anagrams.get(key);
     }
 
-    public void addAnagram(final Map<Integer, Integer> wordData, Set<String> words) {
-        anagrams.put(wordData, words);
+    public void addAnagram(String key, Set<String> words) {
+        anagrams.put(key, words);
     }
 
     public Stream<Set<String>> getAllAnagrams() {
