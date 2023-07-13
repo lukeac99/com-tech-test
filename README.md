@@ -21,6 +21,6 @@ It was assumed after examining the test files that all words inputted would be i
 
 ## Description of Solution
 
-For this task I decided that each word would need a unique identifier which was independant of the ordering of the letters within this word.
-This was done by creating an enum which included each letter in the alphabet, and creating a method which would return the value of each letter(s) position within the alphabet summed.
-For example: "dog" -> d=4 , o=15, g=7. Therefore 'dog' = 36. This however doesn't provide the uniqueness I required as other words could reach this combination. However other words with the same number of letters could not.
+For this task I decided that each word would need a unique identifier which was independent of the ordering of the letters within this word.
+This was done by first sorting the individual letters of each word into alphabetical order by converting each word into a charArray. This would create a unique key that any combination of the same letters will match.
+This Key was used in a Map with a set of Strings (each word). A Set was used to avoid duplicates. The repository was checked to see if this key exists. If it does then the word was added to the set stored for that key. If not then a new key and set of words was created.

@@ -23,7 +23,7 @@ public class AnagramService {
             Arrays.sort(chars);
             final String key = String.valueOf(chars);
             final Set<String> words = anagramRepository.getAnagram(key);
-            if (nonNull(words)) {
+            if (words != null) {
                 final Set<String> newSet = new HashSet<>(words);
                 newSet.add(word);
                 anagramRepository.addAnagram(key, newSet);
